@@ -1,9 +1,9 @@
-Base da Datos 1
+Bases de Datos 1
 ================
 
-Semestres II 2023 TEC.
+Semestre II 2023 TEC.
 Frenny Montezuma Castillo, 2021009728.
 
 ## Tareas 
 
-1- Whather-app
+1- TareaCorta1
