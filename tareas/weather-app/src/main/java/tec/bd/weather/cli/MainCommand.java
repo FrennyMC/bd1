@@ -1,5 +1,7 @@
-package tec.bd.weather;
+package tec.bd.weather.cli;
  
+import tec.bd.weather.cli.WeatherByZipCodeCommand;
+import tec.bd.weather.cli.WeatherByCityCommand;
 import picocli.CommandLine;
 
 @CommandLine.Command(
