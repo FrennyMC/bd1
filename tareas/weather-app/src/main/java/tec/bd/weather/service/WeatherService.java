@@ -1,7 +1,7 @@
 
 package tec.bd.weather.service;
 
-import tec.bd.weather.entity.Weather;
+import tec.bd.weather.entity.Forecast;
 
 /**
  *
@@ -12,5 +12,12 @@ public interface WeatherService {
     
     float getZipCodeTemperature(String zipCode);
     
-    void newForecast(Weather weather);
+    void newForecast(Forecast weather);
+    
+    Forecast updateForecast(Forecast weather);
+    
+    //Implementar jsjsj 
+    
+    void removeForecast(int forecastId);
+    
 }

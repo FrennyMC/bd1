@@ -1,14 +1,14 @@
  package tec.bd.weather.service;
 
-import tec.bd.weather.entity.Weather;
+import tec.bd.weather.entity.Forecast;
 import tec.bd.weather.repository.Repository;
  
  
 public class WeatherServiceImpl implements WeatherService{
 
-    private Repository<Weather, Integer> weatherRepository;
+    private Repository<Forecast, Integer> weatherRepository;
     
-    public WeatherServiceImpl(Repository<Weather, Integer> weatherRepository){
+    public WeatherServiceImpl(Repository<Forecast, Integer> weatherRepository){
         this.weatherRepository = weatherRepository;
     }
     @Override
@@ -23,17 +23,39 @@ public class WeatherServiceImpl implements WeatherService{
     }
     @Override
     public float getZipCodeTemperature(String zipCode){
-        return 0;
+        var weather = this.weatherRepository
+                .findAll()
+                .stream()
+                .filter(e -> e.getZipCode().equals(zipCode))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException(zipCode + " is not supported"));
+        return weather.getTemperature();
     }
     
     @Override
-    public void newForecast(Weather newWeather) {
-        Weather.validate(newWeather);
-        var current = this.weatherRepository.findById(newWeather.getId());
+    public void newForecast(Forecast newForecast) {
+        Forecast.validate(newForecast);
+        var current = this.weatherRepository.findById(newForecast.getId());
         if (current.isPresent()){
             throw new RuntimeException("Weather forecast ID already exist in database");
         }
         
-        this.weatherRepository.save(newWeather);
+        this.weatherRepository.save(newForecast);
     }
+    @Override
+    public Forecast updateForecast(Forecast forecast) {
+        Forecast.validate(forecast);
+        var current = this.weatherRepository.findById(forecast.getId());
+        if (current.isEmpty()){
+            throw new RuntimeException("Weather forecast ID doesn't exists in database");
+        }
+        
+        return this.weatherRepository.update(forecast);
+    }
+    
+    @Override
+    public void removeForecast(int forecastId){
+        // To Do 
+    }
+    
 }
