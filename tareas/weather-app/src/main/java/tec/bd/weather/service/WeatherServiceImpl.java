@@ -54,8 +54,8 @@ public class WeatherServiceImpl implements WeatherService{
     }
     
     @Override
-    public void removeForecast(int forecastId){
-        // To Do 
+    public void removeForecast(int forecastId) {
+        this.weatherRepository.delete(forecastId);
     }
     
 }

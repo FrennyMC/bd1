@@ -60,10 +60,10 @@ public class InMemoryForecastRepository implements Repository<Forecast, Integer>
         return current;
     }
     
-    @Override
-    public void removeForecast(int forecastId){
-        // TODO
-        // Solamente se puede borrar un forecast que exista.
+    //@Override
+    public void removeForecast(int forecastId) {
+        var forecastToRemove = findById(forecastId);
+        forecastToRemove.ifPresent(forecast -> this.inMemoryForecastData.remove(forecast));
     }
     
 }

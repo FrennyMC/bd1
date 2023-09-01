@@ -21,7 +21,7 @@ public class UpdateForecastCommand {
     @CommandLine.Parameters(paramLabel = "<temperature>", description = "Temperature value")
     private float temperature;
     
-    @Override
+    //@Override
     public void run(){
         try{
             var appContext = new AplicationContext();
