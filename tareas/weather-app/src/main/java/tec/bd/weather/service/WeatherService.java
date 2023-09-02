@@ -20,4 +20,6 @@ public interface WeatherService {
     
     void removeForecast(int forecastId);
     
+    
+    
 }

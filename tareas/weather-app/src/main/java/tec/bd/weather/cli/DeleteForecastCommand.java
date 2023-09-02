@@ -2,7 +2,6 @@ package tec.bd.weather.cli;
 
 import picocli.CommandLine;
 import tec.bd.weather.AplicationContext;
-import tec.bd.weather.entity.Forecast;
 
 @CommandLine.Command(name = "delete-forecast", aliases = { "df" }, description = "Delete a forecast")
 public class DeleteForecastCommand {
@@ -14,16 +13,9 @@ public class DeleteForecastCommand {
             var appContext = new AplicationContext();
             var weatherService = appContext.getWeatherService();
             
-            // Aquí obtienes el pronóstico existente que deseas eliminar
-            var existingForecast = weatherService.getForecastById(forecastId);
-            
-            if (existingForecast != null) {
-                // Si el pronóstico existe, lo borras
-                weatherService.deleteForecast(existingForecast.getId());
-                System.out.println("Forecast deleted successfully.");
-            } else {
-                System.out.println("Forecast with ID " + forecastId + " not found.");
-            }
+            // Aquí llamamos al método removeForecast para eliminar el pronóstico
+            weatherService.removeForecast(forecastId);
+            System.out.println("Forecast with ID " + forecastId + " deleted successfully.");
         } catch (Exception e) {
             System.err.println("Can't delete forecast. " + e.getMessage());
         }
