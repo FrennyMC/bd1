@@ -1,12 +1,14 @@
-package tec.bd.weather;
+package tec.bd.weather.cli;
  
 import picocli.CommandLine;
 
 @CommandLine.Command(
     name = "Weather App",
     subcommands = {
-        WeatherByCityCommand.class,
-        WeatherByZipCodeCommand.class,
+        ForecastByCityCommand.class,
+        ForecastByZipCodeCommand.class,
+        CreateForecastCommand.class,
+        UpdateForecastCommand.class,
         CommandLine.HelpCommand.class
     },
     description = "Weather App Service by City and  Zip code")
