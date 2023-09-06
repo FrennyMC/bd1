@@ -66,4 +66,5 @@ public class InMemoryForecastRepository implements Repository<Forecast, Integer>
         forecastToRemove.ifPresent(forecast -> this.inMemoryForecastData.remove(forecast));
     }
     
+    
 }

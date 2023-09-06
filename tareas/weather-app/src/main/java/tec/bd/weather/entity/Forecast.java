@@ -8,6 +8,7 @@ public class Forecast {
     private String countryName;
     
     public Forecast(){}
+    // Constructor para deleteForecast
     
     public Forecast(Integer id, String cityName,String countryName, String zipCode, float temperature){
         this.id = id;

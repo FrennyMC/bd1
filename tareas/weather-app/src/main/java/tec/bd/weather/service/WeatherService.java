@@ -2,6 +2,7 @@
 package tec.bd.weather.service;
 
 import tec.bd.weather.entity.Forecast;
+import tec.bd.weather.repository.Repository;
 
 /**
  *
@@ -20,6 +21,6 @@ public interface WeatherService {
     
     void removeForecast(int forecastId);
     
-    
+    Repository<Forecast, Integer> getWeatherRepository();
     
 }
