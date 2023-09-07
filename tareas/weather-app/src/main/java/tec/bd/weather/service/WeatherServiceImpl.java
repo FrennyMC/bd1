@@ -1,4 +1,4 @@
- package tec.bd.weather.service;
+package tec.bd.weather.service;
 
 import tec.bd.weather.entity.Forecast;
 import tec.bd.weather.repository.Repository;
@@ -56,6 +56,11 @@ public class WeatherServiceImpl implements WeatherService{
     @Override
     public void removeForecast(int forecastId) {
         this.weatherRepository.delete(forecastId);
+    }
+    
+    @Override
+    public Repository<Forecast, Integer> getWeatherRepository() {
+        return this.weatherRepository;
     }
     
     
