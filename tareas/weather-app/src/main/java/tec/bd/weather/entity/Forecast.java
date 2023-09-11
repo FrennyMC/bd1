@@ -83,27 +83,28 @@ public class Forecast {
     }
     
     
-    public static void validate(Forecast weather){
-        if(weather == null){
+    public static void validate(Forecast weather) {
+        if (weather == null) {
             throw new RuntimeException("No weather forecast was provided");
         }
-        if (weather.getId() == null){
+        if (weather.getId() == null) {
             throw new RuntimeException("No weather forecast ID was provided");
         }
-        if (weather.getId() < 1){
+        if (weather.getId() < 1) {
             throw new RuntimeException("Weather forecast ID invalid");
         }
-        if (weather.getCountryName().isBlank()){
+        if (weather.getCountryName().isBlank()) {
             throw new RuntimeException("Weather forecast country invalid");
         }
-        if (weather.getCityName().isBlank()){
+        if (weather.getCityName().isBlank()) {
             throw new RuntimeException("Weather forecast city invalid");
         }
-        if (weather.getZipCode().isBlank()){
+        if (weather.getZipCode().isBlank()) {
             throw new RuntimeException("Weather forecast zip Code invalid");
         }
-        if (weather.getId() < 0){
+        if (weather.getId() < 0) {
             throw new RuntimeException("Weather forecast ID invalid");
         }
     }
+
 }

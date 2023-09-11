@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: tec.bd.weather.service.WeatherServiceImplTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.093 s <<< FAILURE! - in tec.bd.weather.service.WeatherServiceImplTest
-GivenValidForecast_WhenUpdatingTemperature_ThenNewTemperature  Time elapsed: 1.074 s  <<< ERROR!
-java.lang.RuntimeException: Limon is not supported
-	at tec.bd.weather.service.WeatherServiceImplTest.GivenValidForecast_WhenUpdatingTemperature_ThenNewTemperature(WeatherServiceImplTest.java:145)
-
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.219 s - in tec.bd.weather.service.WeatherServiceImplTest

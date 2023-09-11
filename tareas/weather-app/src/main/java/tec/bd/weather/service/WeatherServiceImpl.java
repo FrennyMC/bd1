@@ -48,6 +48,7 @@ public class WeatherServiceImpl implements WeatherService{
         var current = this.weatherRepository.findById(forecast.getId());
         if (current.isEmpty()){
             throw new RuntimeException("Weather forecast ID doesn't exists in database");
+
         }
         
         return this.weatherRepository.update(forecast);

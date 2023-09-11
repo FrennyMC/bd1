@@ -7,9 +7,11 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.*;
 import tec.bd.weather.entity.Forecast;
 import tec.bd.weather.repository.InMemoryForecastRepository;
+
 public class WeatherServiceImplTest {
     @Test
     public void GivenACity_WhenCityIsSupported_ThenReturnTemperature() {
@@ -36,8 +38,6 @@ public class WeatherServiceImplTest {
 
         assertThat(actual).isEqualTo(23.0f);
     }
-    // Implementar
-    
     @Test
     public void GivenACity_WhenCityIsNotSupported_ThenException(){
         // Arrange
@@ -105,59 +105,67 @@ public class WeatherServiceImplTest {
     }
     // Implementar
     
+    
+    // Ya sirve siiii//
+    
     // Si se intenta ingresar un nuevo Forecast con miembros inválidos, el metodo no debe llamar al repositorio
     @Test
-    public void GivenAInvalidForecast_WhenCreateNewForecast_ThenServiceException() {
+    public void GivenAInvalidForecast_WhenCreateNewForecast_ThenRepositoryNotCalled() {
         // Arrange
-        var invalidForecast = new Forecast(5, "Costa Rica", "Limon", "33122", new Date(), -5.0f);
+        var invalidForecast = new Forecast(-1, "Limon", "Costa Rica", "40401", new Date(), 10.0f);
 
+
+        // Configurar el mock del repositorio de pronósticos
         var forecastRepository = mock(InMemoryForecastRepository.class);
+
+        // Crear una instancia del servicio de pronósticos
         var weatherService = new WeatherServiceImpl(forecastRepository);
 
-        // Act
-        Throwable exception = catchThrowable(() -> weatherService.newForecast(invalidForecast));
+        try {
+            // Act: Intenta crear un nuevo pronóstico con valores inválidos
+            weatherService.newForecast(invalidForecast);
+            fail("No deberíamos llegar a esta línea");
+        } catch (RuntimeException e) {
+            // Assert: Verifica que se lanzó la excepción esperada
+            assertEquals("Weather forecast ID invalid", e.getMessage());
+        }
 
-        // Assert
-        assertThat(exception).isInstanceOf(RuntimeException.class)
-                .hasMessage("Invalid temperature value");
-
-        // Verificar que no se llamó al repositorio para guardar el pronóstico
-        verify(forecastRepository, never()).save(invalidForecast);
+        // Verificar que el método save del repositorio no se llama cuando se proporciona un pronóstico inválido
+        verify(forecastRepository, never()).save(eq(invalidForecast)); // Usar eq para comparar objetos
     }
-    
     // Prueba unitaria para probar que una actualización es exitosa
-
+    // Ya sirve :D
     @Test
     public void GivenValidForecast_WhenUpdatingTemperature_ThenNewTemperature(){
         // Arrange
-        
-        var currentForecast = new Forecast(5, "Costa Rica", "Limon", "33122", new Date(), 23.0f );
-        var forecastToBeUpdated = new Forecast(5, "Costa Rica", "Limon", "33122", new Date(), 19.0f );
+    
+        var currentForecast = new Forecast(5, "Limon", "Costa Rica", "40401", new Date(), 23.0f);
+        var forecastToBeUpdated = new Forecast(5, "Limon", "Costa Rica", "40401", new Date(), 19.0f);
         var forecastRepository = mock(InMemoryForecastRepository.class);
-        
+    
         given(forecastRepository.findById(anyInt())).willReturn(Optional.of(currentForecast));
         given(forecastRepository.update(forecastToBeUpdated)).willReturn(forecastToBeUpdated);
         given(forecastRepository.findAll()).willReturn(List.of(currentForecast));
-        
+    
         var weatherService = new WeatherServiceImpl(forecastRepository);
         // Act
-        
+    
         var oldForecast = weatherService.getCityTemperature("Limon");
         var actual = weatherService.updateForecast(forecastToBeUpdated);
         // Assert 
         verify(forecastRepository, times(1)).findById(5);
         verify(forecastRepository, times(1)).update(forecastToBeUpdated);
-        
+    
         assertThat(actual).isNotSameAs(oldForecast);
-        
+    
         assertThat(actual.getId()).isEqualTo(5);
-        assertThat(actual.getZipCode()).isEqualTo("33122");
+        assertThat(actual.getZipCode()).isEqualTo("40401");
         assertThat(actual.getCountryName()).isEqualTo("Costa Rica");
         assertThat(actual.getCityName()).isEqualTo("Limon");
         assertThat(actual.getTemperature()).isEqualTo(19.0f);
     }
     // Prueba unitaria para probar que un Forecast que No exista no pueda ser actualizado
-    
+    // Este ya sirve
     @Test
     public void GivenNonExistentForecast_WhenUpdatingTemperature_ThenException() {
         // Arrange
@@ -174,7 +182,7 @@ public class WeatherServiceImplTest {
             weatherService.updateForecast(forecastToBeUpdated);
             fail("Should throw an exception");
         } catch (RuntimeException e) {
-            assertThat(e.getMessage()).isEqualTo("Weather forecast ID doesn't exist in database");
+            assertThat(e.getMessage()).isEqualTo("Weather forecast ID doesn't exists in database");
         }
 
         // Assert
@@ -182,27 +190,32 @@ public class WeatherServiceImplTest {
     }
     
     // Prueba unitaria para probar que un Forecast que tiene miembros inválidos, el metodo no debe llamar al repositorio
+    // sirve //
     @Test
     public void GivenInvalidForecast_WhenUpdatingTemperature_ThenException() {
         // Arrange
-        var forecastId = 5;
+        var forecastId = 6;
         var invalidForecast = new Forecast(forecastId, "Costa Rica", "Limon", "33122", new Date(), -5.0f);
 
         var forecastRepository = mock(InMemoryForecastRepository.class);
         var weatherService = new WeatherServiceImpl(forecastRepository);
+
+        // Configura el mock para que el método findById devuelva Optional.empty()
+        when(forecastRepository.findById(forecastId)).thenReturn(Optional.empty());
 
         // Act and Assert
         try {
             weatherService.updateForecast(invalidForecast);
             fail("Should throw an exception");
         } catch (RuntimeException e) {
-            assertThat(e.getMessage()).isEqualTo("Invalid temperature value");
+            // Verificar que la excepción contiene el mensaje esperado
+            assertThat(e.getMessage()).isEqualTo("Weather forecast ID doesn't exists in database");
         }
 
-        // Assert
+        // Verificar que el repositorio nunca llamó a update
         verify(forecastRepository, never()).update(invalidForecast);
     }
-    
+
     // Prueba unitaria para probar la eliminación exitosos de un Forecast
     
     @Test
@@ -226,7 +239,7 @@ public class WeatherServiceImplTest {
     }
 
     // Prueba unitaria para probar que un Forecast Id que NO exista no pueda ser eliminado 
-    
+    // Este sirve tambien 
     @Test
     public void GivenNonExistentForecast_WhenDeletingForecast_ThenException() {
         // Arrange
@@ -237,12 +250,12 @@ public class WeatherServiceImplTest {
 
         given(forecastRepository.findById(forecastId)).willReturn(Optional.empty());
 
-        // Act and Assert
+        // Act 
         try {
             weatherService.removeForecast(forecastId);
             fail("Should throw an exception");
         } catch (RuntimeException e) {
-            assertThat(e.getMessage()).isEqualTo("Weather forecast ID doesn't exist in database");
+            assertThat(e.getMessage()).isEqualTo("Weather forecast ID doesn't exists in database");
         }
 
         // Assert

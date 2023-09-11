@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="tec.bd.weather.service.WeatherServiceImplTest" time="1.093" tests="1" errors="1" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="tec.bd.weather.service.WeatherServiceImplTest" time="1.219" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,9 +15,8 @@
     <property name="user.country" value="CR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17.0.2\bin"/>
-    <property name="sun.java.command" value="C:\Users\usuario\AppData\Local\Temp\surefire17439274891541496467\surefirebooter17103776552601690906.jar C:\Users\usuario\AppData\Local\Temp\surefire17439274891541496467 2023-09-09T11-56-47_878-jvmRun1 surefire17639431173855390916tmp surefire_012345353573464144899tmp"/>
+    <property name="sun.java.command" value="C:\Users\usuario\AppData\Local\Temp\surefire6125679296815157548\surefirebooter13803876635103415180.jar C:\Users\usuario\AppData\Local\Temp\surefire6125679296815157548 2023-09-11T12-21-50_314-jvmRun1 surefire773276265826546176tmp surefire_09043510624371336972tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="tec.bd.weather.service.WeatherServiceImplTest#GivenValidForecast_WhenUpdatingTemperature_ThenNewTemperature"/>
     <property name="surefire.test.class.path" value="C:\Users\usuario\Desktop\bd1\tareas\weather-app\target\test-classes;C:\Users\usuario\Desktop\bd1\tareas\weather-app\target\classes;C:\Users\usuario\.m2\repository\info\picocli\picocli\4.6.1\picocli-4.6.1.jar;C:\Users\usuario\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.1\junit-jupiter-api-5.7.1.jar;C:\Users\usuario\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\usuario\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\usuario\.m2\repository\org\junit\platform\junit-platform-commons\1.7.1\junit-platform-commons-1.7.1.jar;C:\Users\usuario\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.1\junit-jupiter-engine-5.7.1.jar;C:\Users\usuario\.m2\repository\org\junit\platform\junit-platform-engine\1.7.1\junit-platform-engine-1.7.1.jar;C:\Users\usuario\.m2\repository\org\assertj\assertj-core\3.19.0\assertj-core-3.19.0.jar;C:\Users\usuario\.m2\repository\org\mockito\mockito-core\3.8.0\mockito-core-3.8.0.jar;C:\Users\usuario\.m2\repository\net\bytebuddy\byte-buddy\1.10.20\byte-buddy-1.10.20.jar;C:\Users\usuario\.m2\repository\net\bytebuddy\byte-buddy-agent\1.10.20\byte-buddy-agent-1.10.20.jar;C:\Users\usuario\.m2\repository\org\objenesis\objenesis\3.1\objenesis-3.1.jar;C:\Users\usuario\.m2\repository\org\mockito\mockito-junit-jupiter\3.8.0\mockito-junit-jupiter-3.8.0.jar;C:\Users\usuario\.m2\repository\com\squareup\okhttp3\mockwebserver\3.9.0\mockwebserver-3.9.0.jar;C:\Users\usuario\.m2\repository\com\squareup\okhttp3\okhttp\3.9.0\okhttp-3.9.0.jar;C:\Users\usuario\.m2\repository\com\squareup\okio\okio\1.13.0\okio-1.13.0.jar;C:\Users\usuario\.m2\repository\org\bouncycastle\bcprov-jdk15on\1.50\bcprov-jdk15on-1.50.jar;C:\Users\usuario\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\usuario\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\usuario"/>
@@ -31,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\usuario\AppData\Local\Temp\surefire17439274891541496467\surefirebooter17103776552601690906.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\usuario\AppData\Local\Temp\surefire6125679296815157548\surefirebooter13803876635103415180.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.2+8-LTS-86"/>
@@ -58,9 +57,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="GivenValidForecast_WhenUpdatingTemperature_ThenNewTemperature" classname="tec.bd.weather.service.WeatherServiceImplTest" time="1.074">
-    <error message="Limon is not supported" type="java.lang.RuntimeException">java.lang.RuntimeException: Limon is not supported
-	at tec.bd.weather.service.WeatherServiceImplTest.GivenValidForecast_WhenUpdatingTemperature_ThenNewTemperature(WeatherServiceImplTest.java:145)
-</error>
-  </testcase>
+  <testcase name="GivenExistingForecast_WhenDeletingForecast_ThenForecastIsDeleted" classname="tec.bd.weather.service.WeatherServiceImplTest" time="1.087"/>
+  <testcase name="GivenAValidForecast_WhenCreateNewForecast_ThenForecastIsCreated" classname="tec.bd.weather.service.WeatherServiceImplTest" time="0.006"/>
+  <testcase name="GivenACity_WhenCityIsNotSupported_ThenException" classname="tec.bd.weather.service.WeatherServiceImplTest" time="0.006"/>
+  <testcase name="GivenNonExistentForecast_WhenUpdatingTemperature_ThenException" classname="tec.bd.weather.service.WeatherServiceImplTest" time="0.006"/>
+  <testcase name="GivenNonExistentForecast_WhenDeletingForecast_ThenException" classname="tec.bd.weather.service.WeatherServiceImplTest" time="0.002"/>
+  <testcase name="GivenExistingForecast_WhenCreateNewForecast_ThenServiceException" classname="tec.bd.weather.service.WeatherServiceImplTest" time="0.002"/>
+  <testcase name="GivenAInvalidForecast_WhenCreateNewForecast_ThenRepositoryNotCalled" classname="tec.bd.weather.service.WeatherServiceImplTest" time="0.008"/>
+  <testcase name="GivenValidForecast_WhenUpdatingTemperature_ThenNewTemperature" classname="tec.bd.weather.service.WeatherServiceImplTest" time="0.008"/>
+  <testcase name="GivenACity_WhenCityIsSupported_ThenReturnTemperature" classname="tec.bd.weather.service.WeatherServiceImplTest" time="0.076"/>
+  <testcase name="GivenInvalidForecast_WhenUpdatingTemperature_ThenException" classname="tec.bd.weather.service.WeatherServiceImplTest" time="0.004"/>
 </testsuite>
