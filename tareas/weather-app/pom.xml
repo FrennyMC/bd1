@@ -15,6 +15,7 @@
   <scm>
       <developerConnection>scm:https://github.com/FrennyMC/bd1.git</developerConnection>
   </scm>
+
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -78,9 +79,6 @@
     </dependency>
     
   </dependencies>
-  
-
-    
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
@@ -126,7 +124,7 @@
                   </manifest>
               </archive>
               <descriptorRefs>
-                  <descriptoRefs>jar-with-dependencies</descriptoRefs>
+                  <descriptorRefs>jar-with-dependencies</descriptorRefs>
               </descriptorRefs>
           </configuration>
           <executions>
