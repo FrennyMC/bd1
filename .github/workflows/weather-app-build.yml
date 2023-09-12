@@ -1,4 +1,3 @@
- 
 name: Weather-App build pipeline
 
 # Definición de eventos
@@ -7,31 +6,29 @@ on:
     branches:
       - main
       - dev
-
     paths:
-      - tareas/weather-app/**
-      - .github/workflows/weather-app-build.yml 
+      - 'tareas/weather-app/**'
+      - '.github/workflows/weather-app-build.yml'
 
 # Trabajos
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2  # Usa la última versión de actions/checkout
       - name: Set up JDK 14
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v2  # Usa la última versión de actions/setup-java
         with:
-          java-version: '14'
+          java-version: 14
           distribution: 'adopt'
           server-id: 'github'
           cache: 'maven'
       - name: Cache Maven packages
-        uses: actions/cache@v3
+        uses: actions/cache@v2  # Usa la última versión de actions/cache
         with:
-          path: ~/.m2
+          path: ~/.m2/repository
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build with Maven
@@ -42,5 +39,5 @@ jobs:
           git config user.name "GitHub Actions"
       - name: Publish JAR Dry Run
         run: mvn -B release:prepare release:perform -DdryRun --file tareas/weather-app/pom.xml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
