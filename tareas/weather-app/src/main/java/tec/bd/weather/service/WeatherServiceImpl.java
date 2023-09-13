@@ -48,6 +48,7 @@ public class WeatherServiceImpl implements WeatherService{
         var current = this.weatherRepository.findById(forecast.getId());
         if (current.isEmpty()){
             throw new RuntimeException("Weather forecast ID doesn't exists in database");
+
         }
         
         return this.weatherRepository.update(forecast);
@@ -55,8 +56,18 @@ public class WeatherServiceImpl implements WeatherService{
     
     @Override
     public void removeForecast(int forecastId) {
+        var current = this.weatherRepository.findById(forecastId);
+        if (current.isEmpty()){
+            throw new RuntimeException("Weather forecast ID doesn't exists in database");
+        }
         this.weatherRepository.delete(forecastId);
+    }  
+    
+    @Override
+    public Repository<Forecast, Integer> getWeatherRepository() {
+        return this.weatherRepository;
     }
+<<<<<<< HEAD
     
     @Override
     public Repository<Forecast, Integer> getWeatherRepository() {
@@ -64,4 +75,6 @@ public class WeatherServiceImpl implements WeatherService{
     }
     
     
+=======
+>>>>>>> tarea-3
 }

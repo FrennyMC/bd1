@@ -10,7 +10,12 @@ import picocli.CommandLine;
         CreateForecastCommand.class,
         UpdateForecastCommand.class,
         DeleteForecastCommand.class,
+<<<<<<< HEAD
         CommandLine.HelpCommand.class
+=======
+        CommandLine.HelpCommand.class,
+        
+>>>>>>> tarea-3
     },
     description = "Weather App Service by City and  Zip code")
 

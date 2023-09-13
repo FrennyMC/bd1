@@ -1,5 +1,6 @@
 package tec.bd.weather.cli;
 
+import java.util.Date;
 import picocli.CommandLine;
 import tec.bd.weather.AplicationContext;
 import tec.bd.weather.entity.Forecast;
@@ -19,6 +20,9 @@ public class CreateForecastCommand {
     @CommandLine.Parameters(paramLabel = "<zip Code>", description = "The zip Code")
     private String zipCode;
     
+    @CommandLine.Parameters(paramLabel = "<forecast Date>", description = "The forecast date")
+    private Date forecastDate;
+    
     @CommandLine.Parameters(paramLabel = "<temperature>", description = "Temperature value")
     private float temperature;
     
@@ -27,7 +31,7 @@ public class CreateForecastCommand {
         try{
             var appContext = new AplicationContext();
             var weatherService = appContext.getWeatherService();
-            var newForecast = new Forecast(newForecastId, countryName, cityName, zipCode, temperature);
+            var newForecast = new Forecast(newForecastId, countryName, cityName, zipCode, forecastDate,  temperature);
             weatherService.newForecast(newForecast);
             System.out.println(newForecast);
         } catch (Exception e){

@@ -1,19 +1,24 @@
 package tec.bd.weather.entity;
 
+import java.util.Date;
+
 public class Forecast {
     private float temperature;
+    private Date forecastDate;
     private String cityName;
     private String zipCode;
     private Integer id;
     private String countryName;
     
     public Forecast(){}
+    // Constructor para deleteForecast
     
-    public Forecast(Integer id, String cityName,String countryName, String zipCode, float temperature){
+    public Forecast(Integer id, String cityName,String countryName, String zipCode, Date forecastDate, float temperature){
         this.id = id;
         this.cityName = cityName;
         this.countryName = countryName;
         this.zipCode = zipCode;
+        this.forecastDate = forecastDate;
         this.temperature = temperature;
     }
 
@@ -57,11 +62,20 @@ public class Forecast {
         this.countryName = countryName;
     }
 
+    public Date getForecastDate() {
+        return forecastDate;
+    }
+
+    public void setForecastDate(Date forecastDate) {
+        this.forecastDate = forecastDate;
+    }
+   
     @Override
     public String toString() {
         return "Forecast{" + 
                 "id = " + id +
                 "temperature= " + temperature + 
+                ", date = " + forecastDate + 
                 ", country = " + countryName +
                 ", city = " + cityName + 
                 ", zipCode=" + zipCode + 
@@ -69,27 +83,28 @@ public class Forecast {
     }
     
     
-    public static void validate(Forecast weather){
-        if(weather == null){
+    public static void validate(Forecast weather) {
+        if (weather == null) {
             throw new RuntimeException("No weather forecast was provided");
         }
-        if (weather.getId() == null){
+        if (weather.getId() == null) {
             throw new RuntimeException("No weather forecast ID was provided");
         }
-        if (weather.getId() < 1){
+        if (weather.getId() < 1) {
             throw new RuntimeException("Weather forecast ID invalid");
         }
-        if (weather.getCountryName().isBlank()){
+        if (weather.getCountryName().isBlank()) {
             throw new RuntimeException("Weather forecast country invalid");
         }
-        if (weather.getCityName().isBlank()){
+        if (weather.getCityName().isBlank()) {
             throw new RuntimeException("Weather forecast city invalid");
         }
-        if (weather.getZipCode().isBlank()){
+        if (weather.getZipCode().isBlank()) {
             throw new RuntimeException("Weather forecast zip Code invalid");
         }
-        if (weather.getId() < 0){
+        if (weather.getId() < 0) {
             throw new RuntimeException("Weather forecast ID invalid");
         }
     }
+
 }
