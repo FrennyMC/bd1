@@ -18,13 +18,22 @@
     <tag>HEAD</tag>
   </scm>
 
-
+    <!-- Cosas que añadí -->
   <distributionManagement>
       <repository>
           <id>github</id>
           <url>https://maven.pkg.github.com/FrennyMC/bd1</url>
       </repository>
   </distributionManagement>
+  
+  <distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>Central Repository</name>
+        <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+  </distributionManagement>
+
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
