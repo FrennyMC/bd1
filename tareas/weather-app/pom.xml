@@ -22,11 +22,12 @@
   
   <distributionManagement>
     <repository>
-        <id>central</id>
-        <name>Central Repository</name>
-        <url>https://repo.maven.apache.org/maven2</url>
+        <id>github</id>
+        <name>GitHub FrennyMC Apache Maven Packages</name>
+        <url>https://maven.pkg.github.com/FrennyMC/bd1</url>
     </repository>
-  </distributionManagement>
+ </distributionManagement>
+
 
 
   <properties>
