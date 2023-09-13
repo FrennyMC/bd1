@@ -19,12 +19,6 @@
   </scm>
 
     <!-- Cosas que añadí -->
-  <distributionManagement>
-      <repository>
-          <id>github</id>
-          <url>https://maven.pkg.github.com/FrennyMC/bd1</url>
-      </repository>
-  </distributionManagement>
   
   <distributionManagement>
     <repository>
