@@ -105,9 +105,6 @@ public class WeatherServiceImplTest {
     }
     // Implementar
     
-    
-    // Ya sirve siiii//
-    
     // Si se intenta ingresar un nuevo Forecast con miembros inválidos, el metodo no debe llamar al repositorio
     @Test
     public void GivenAInvalidForecast_WhenCreateNewForecast_ThenRepositoryNotCalled() {
@@ -134,7 +131,6 @@ public class WeatherServiceImplTest {
         verify(forecastRepository, never()).save(eq(invalidForecast)); // Usar eq para comparar objetos
     }
     // Prueba unitaria para probar que una actualización es exitosa
-    // Ya sirve :D
     @Test
     public void GivenValidForecast_WhenUpdatingTemperature_ThenNewTemperature(){
         // Arrange
@@ -165,7 +161,6 @@ public class WeatherServiceImplTest {
         assertThat(actual.getTemperature()).isEqualTo(19.0f);
     }
     // Prueba unitaria para probar que un Forecast que No exista no pueda ser actualizado
-    // Este ya sirve
     @Test
     public void GivenNonExistentForecast_WhenUpdatingTemperature_ThenException() {
         // Arrange
@@ -190,7 +185,6 @@ public class WeatherServiceImplTest {
     }
     
     // Prueba unitaria para probar que un Forecast que tiene miembros inválidos, el metodo no debe llamar al repositorio
-    // sirve //
     @Test
     public void GivenInvalidForecast_WhenUpdatingTemperature_ThenException() {
         // Arrange
@@ -203,7 +197,7 @@ public class WeatherServiceImplTest {
         // Configura el mock para que el método findById devuelva Optional.empty()
         when(forecastRepository.findById(forecastId)).thenReturn(Optional.empty());
 
-        // Act and Assert
+        // Act 
         try {
             weatherService.updateForecast(invalidForecast);
             fail("Should throw an exception");
@@ -211,7 +205,8 @@ public class WeatherServiceImplTest {
             // Verificar que la excepción contiene el mensaje esperado
             assertThat(e.getMessage()).isEqualTo("Weather forecast ID doesn't exists in database");
         }
-
+         
+        // Assert
         // Verificar que el repositorio nunca llamó a update
         verify(forecastRepository, never()).update(invalidForecast);
     }
@@ -219,7 +214,6 @@ public class WeatherServiceImplTest {
     // Prueba unitaria para probar la eliminación exitosos de un Forecast
     
     @Test
-    // Buenooooo
     public void GivenExistingForecast_WhenDeletingForecast_ThenForecastIsDeleted() {
         // Arrange
         var forecastId = 5;
@@ -239,7 +233,6 @@ public class WeatherServiceImplTest {
     }
 
     // Prueba unitaria para probar que un Forecast Id que NO exista no pueda ser eliminado 
-    // Este sirve tambien 
     @Test
     public void GivenNonExistentForecast_WhenDeletingForecast_ThenException() {
         // Arrange
