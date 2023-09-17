@@ -1,7 +1,7 @@
 package tec.bd.weather;
 
 import tec.bd.weather.entity.Forecast;
-import tec.bd.weather.repository.InMemoryForecastRepository;
+import tec.bd.weather.repository.memory.InMemoryForecastRepository;
 import tec.bd.weather.repository.Repository;
 import tec.bd.weather.service.WeatherService;
 import tec.bd.weather.service.WeatherServiceImpl;

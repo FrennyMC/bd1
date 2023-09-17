@@ -1,8 +1,9 @@
-package tec.bd.weather.repository;
+package tec.bd.weather.repository.memory;
 
 import java.util.*;
 
 import tec.bd.weather.entity.Forecast;
+import tec.bd.weather.repository.Repository;
 
 public class InMemoryForecastRepository implements Repository<Forecast, Integer>{
     

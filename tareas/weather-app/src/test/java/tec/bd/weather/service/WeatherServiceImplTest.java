@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.*;
 import tec.bd.weather.entity.Forecast;
-import tec.bd.weather.repository.InMemoryForecastRepository;
+import tec.bd.weather.repository.memory.InMemoryForecastRepository;
 
 public class WeatherServiceImplTest {
     @Test
@@ -29,7 +29,6 @@ public class WeatherServiceImplTest {
         
         // Act
         var actual = weatherService.getCityTemperature("Alajuela");
-
         // Assert 
 
         verify(forecastRepository, times(1)).findAll();
@@ -69,7 +68,7 @@ public class WeatherServiceImplTest {
         given(forecastRepository.findById(anyInt())).willReturn(Optional.empty());
         
         var weatherService = new WeatherServiceImpl(forecastRepository);
-        var forecast = new Forecast(5, "Costa Rica", "Limon", "33122", new Date(), 23.0f );
+        var forecast = new Forecast(5, "Limon", "Costa Rica", "40401", new Date(), 23.0f);
         
         // Act
         weatherService.newForecast(forecast);

@@ -67,14 +67,5 @@ public class WeatherServiceImpl implements WeatherService{
     public Repository<Forecast, Integer> getWeatherRepository() {
         return this.weatherRepository;
     }
-<<<<<<< HEAD
-    
-    @Override
-    public Repository<Forecast, Integer> getWeatherRepository() {
-        return this.weatherRepository;
-    }
-    
-    
-=======
->>>>>>> tarea-3
+   
 }

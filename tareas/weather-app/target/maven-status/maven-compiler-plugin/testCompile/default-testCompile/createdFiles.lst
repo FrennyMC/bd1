@@ -1,7 +1,2 @@
-<<<<<<< HEAD
-tec\bd\weather\WeatherServiceImplTest.class
-tec\bd\AppTest.class
-=======
 tec\bd\weather\AppTest.class
 tec\bd\weather\service\WeatherServiceImplTest.class
->>>>>>> tarea-3
