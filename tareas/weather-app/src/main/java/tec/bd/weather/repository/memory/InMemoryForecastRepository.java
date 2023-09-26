@@ -8,7 +8,7 @@ import tec.bd.weather.repository.Repository;
 public class InMemoryForecastRepository implements Repository<Forecast, Integer>{
     
     private Set<Forecast> inMemoryForecastData;
-    
+    private int currentMaxId = 0;
     public InMemoryForecastRepository(){
         // "Inicializando" la base de Datos 
         this.inMemoryForecastData = new HashSet<>();
@@ -17,6 +17,14 @@ public class InMemoryForecastRepository implements Repository<Forecast, Integer>
         this.inMemoryForecastData.add(new Forecast(2, "Cartago", "Costa Rica", "20201", new Date(), 24.0f));
         this.inMemoryForecastData.add(new Forecast(3, "San Jose", "Costa Rica", "30301", new Date(), 25.0f));
         this.inMemoryForecastData.add(new Forecast(5, "Limon", "Costa Rica", "40401", new Date(), 23.0f));
+    }
+    
+    public int getCurrentMaxId(){
+        return this.inMemoryForecastData
+                .stream()
+                .max(Comparator.comparing(Forecast::getId))
+                .map(Forecast::getId)
+                .orElse(0);
     }
     
     @Override
@@ -33,8 +41,10 @@ public class InMemoryForecastRepository implements Repository<Forecast, Integer>
     }
 
     @Override
-    public void save(Forecast weather) {
-        this.inMemoryForecastData.add(weather);
+    public Forecast save(Forecast forecast) {
+        forecast.setId(this.getCurrentMaxId() + 1);
+        this.inMemoryForecastData.add(forecast);
+        return forecast;
     }
 
     @Override

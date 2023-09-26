@@ -9,10 +9,11 @@ import picocli.CommandLine;
         ForecastByZipCodeCommand.class,
         CreateForecastCommand.class,
         UpdateForecastCommand.class,
-        DeleteForecastCommand.class,
+        RemoveForecastCommand.class,
+        AllForecastCommand.class,
         CommandLine.HelpCommand.class
     },
-    description = "Weather App Service by City and  Zip code")
+    description = "Weather App ")
 
 public class MainCommand implements Runnable{
     @Override
