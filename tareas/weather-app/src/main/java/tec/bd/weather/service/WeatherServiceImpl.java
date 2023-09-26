@@ -1,5 +1,6 @@
 package tec.bd.weather.service;
 
+import java.util.List;
 import tec.bd.weather.entity.Forecast;
 import tec.bd.weather.repository.Repository;
  
@@ -33,17 +34,28 @@ public class WeatherServiceImpl implements WeatherService{
     }
     
     @Override
-    public void newForecast(Forecast newForecast) {
+    public Forecast newForecast(Forecast newForecast) {
         Forecast.validate(newForecast);
         var current = this.weatherRepository.findById(newForecast.getId());
         if (current.isPresent()){
             throw new RuntimeException("Weather forecast ID already exist in database");
         }
         
-        this.weatherRepository.save(newForecast);
+        return this.weatherRepository.save(newForecast);
     }
+    
+    @Override
+   public List<Forecast> getAllForecasts() {
+       // Implementa la lógica para obtener todos los pronósticos del repositorio.
+       return this.weatherRepository.findAll();
+   }
+
+   
     @Override
     public Forecast updateForecast(Forecast forecast) {
+        if (forecast.getId() < 1){
+            throw new RuntimeException("Invalid forecast ID " + forecast.getId());
+        }
         Forecast.validate(forecast);
         var current = this.weatherRepository.findById(forecast.getId());
         if (current.isEmpty()){

@@ -12,7 +12,9 @@ public class Forecast {
     
     public Forecast(){}
     // Constructor para deleteForecast
-    
+    public Forecast(String countryName, String cityName, String zipCode, Date forecastDate, float temperature){
+        this(0, countryName, cityName, zipCode, forecastDate,temperature);
+    }
     public Forecast(Integer id, String cityName,String countryName, String zipCode, Date forecastDate, float temperature){
         this.id = id;
         this.cityName = cityName;
@@ -83,26 +85,26 @@ public class Forecast {
     }
     
     
-    public static void validate(Forecast weather) {
-        if (weather == null) {
+    public static void validate(Forecast forecast) {
+        if (forecast == null) {
             throw new RuntimeException("No weather forecast was provided");
         }
-        if (weather.getId() == null) {
+        if (forecast.getId() == null) {
             throw new RuntimeException("No weather forecast ID was provided");
         }
-        if (weather.getId() < 1) {
-            throw new RuntimeException("Weather forecast ID invalid");
-        }
-        if (weather.getCountryName().isBlank()) {
+        //if (weather.getId() < 1) {
+         //   throw new RuntimeException("Weather forecast ID invalid");
+        //}
+        if (forecast.getCountryName().isBlank()) {
             throw new RuntimeException("Weather forecast country invalid");
         }
-        if (weather.getCityName().isBlank()) {
+        if (forecast.getCityName().isBlank()) {
             throw new RuntimeException("Weather forecast city invalid");
         }
-        if (weather.getZipCode().isBlank()) {
+        if (forecast.getZipCode().isBlank()) {
             throw new RuntimeException("Weather forecast zip Code invalid");
         }
-        if (weather.getId() < 0) {
+        if (forecast.getId() < 0) {
             throw new RuntimeException("Weather forecast ID invalid");
         }
     }
