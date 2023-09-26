@@ -254,4 +254,79 @@ public class WeatherServiceImplTest {
         verify(forecastRepository, never()).delete(forecastId);
     }
     
+    // Tests Pruebas unitarias Update and Delete
+    
+    // Update 
+    @Test
+    public void GivenValidForecast_WhenUpdatingForecast_ThenUpdatedForecastReturned() {
+        // Arrange
+        var currentForecast = new Forecast(5, "Limon", "Costa Rica", "40401", new Date(), 23.0f);
+        var updatedForecast = new Forecast(5, "Limon", "Costa Rica", "40401", new Date(), 19.0f);
+        var forecastRepository = mock(InMemoryForecastRepository.class);
+
+        given(forecastRepository.findById(anyInt())).willReturn(Optional.of(currentForecast));
+        given(forecastRepository.update(updatedForecast)).willReturn(updatedForecast);
+
+        var weatherService = new WeatherServiceImpl(forecastRepository);
+
+        // Act
+        var actual = weatherService.updateForecast(updatedForecast);
+
+        // Assert
+        verify(forecastRepository, times(1)).findById(5);
+        verify(forecastRepository, times(1)).update(updatedForecast);
+
+        assertThat(actual).isEqualTo(updatedForecast);
+    }
+
+    @Test
+    public void GivenNonExistentForecast_WhenUpdatingForecast_ThenExceptionThrown() {
+        // Arrange
+        var forecastId = 5;
+        var forecastToBeUpdated = new Forecast(forecastId, "Costa Rica", "Limon", "33122", new Date(), 19.0f);
+
+        var forecastRepository = mock(InMemoryForecastRepository.class);
+        var weatherService = new WeatherServiceImpl(forecastRepository);
+
+        given(forecastRepository.findById(forecastId)).willReturn(Optional.empty());
+
+        // Act and Assert
+        try {
+            weatherService.updateForecast(forecastToBeUpdated);
+            fail("Should throw an exception");
+        } catch (RuntimeException e) {
+            assertThat(e.getMessage()).isEqualTo("Weather forecast ID doesn't exists in database");
+        }
+
+        // Assert
+        verify(forecastRepository, never()).update(forecastToBeUpdated);
+    }
+    
+    // Delete 
+
+
+    @Test
+    public void GivenNonExistentForecast_WhenDeletingForecast_ThenExceptionThrown() {
+        // Arrange
+        var forecastId = 99; // Use a non-existent ID
+
+        var forecastRepository = mock(InMemoryForecastRepository.class);
+        var weatherService = new WeatherServiceImpl(forecastRepository);
+
+        given(forecastRepository.findById(forecastId)).willReturn(Optional.empty());
+
+        // Act 
+        try {
+            weatherService.removeForecast(forecastId);
+            fail("Should throw an exception");
+        } catch (RuntimeException e) {
+            assertThat(e.getMessage()).isEqualTo("Weather forecast ID doesn't exists in database");
+        }
+
+        // Assert
+        verify(forecastRepository, never()).delete(forecastId);
+    }
+
+
+    
 }
