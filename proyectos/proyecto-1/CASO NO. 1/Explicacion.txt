@@ -1,0 +1,8 @@
+El modelo presentado cuenta con las entidades necesarias
+para el manejo de multiples sucursales, y a su vez, multiples
+puntos de venta. Las tablas generedas toma en cuenta todos los
+requisitos del proyecto, se puede realizar ventas de productos
+a precio diferente para cada segmento de mercado, y realiza
+correctamente el manejo de ordenes para los proveedores,
+las ordenes puedes contenes todos los productos necesarios y
+se puede realizar la orden por n cantidad de productos.
