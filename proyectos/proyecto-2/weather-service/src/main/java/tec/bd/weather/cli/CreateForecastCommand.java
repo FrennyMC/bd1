@@ -29,11 +29,11 @@ public class CreateForecastCommand {
     public void run() {
         try {
             var appContext = new AplicationContext();
-            var sqliteDataSource = appContext.getSqliteDataSource();
-            var forecastRepository = new ForecastRepository(sqliteDataSource);
+           // var sqliteDataSource = appContext.getSqliteDataSource();
+            //var forecastRepository = new ForecastRepository(sqliteDataSource);
             var forecastToBeCreated = new Forecast(countryName, cityName, zipCode, forecastDate, temperature);
-            var newForecast = forecastRepository.save(forecastToBeCreated);
-            System.out.println(newForecast);
+            //var newForecast = forecastRepository.save(forecastToBeCreated);
+            //System.out.println(newForecast);
         } catch (Exception e) {
             System.err.println("Can't create forecast. " + e.getMessage());
         }
