@@ -1,0 +1,84 @@
+-- Crear la base de datos
+CREATE DATABASE IF NOT EXISTS weather_service;
+
+-- Usar la base de datos
+USE weather_service;
+
+-- Crear tabla country
+CREATE TABLE IF NOT EXISTS country (
+    country_code INT PRIMARY KEY,
+    country_name VARCHAR(255) UNIQUE NOT NULL
+);
+
+-- Crear tabla state
+CREATE TABLE IF NOT EXISTS state (
+    state_code INT PRIMARY KEY,
+    state_name VARCHAR(255) NOT NULL,
+    country_code INT,
+    FOREIGN KEY (country_code) REFERENCES country(country_code)
+);
+
+-- Crear tabla city
+CREATE TABLE IF NOT EXISTS city (
+    city_code INT PRIMARY KEY,
+    city_name VARCHAR(255) NOT NULL,
+    zip_code INT UNIQUE NOT NULL,
+    state_code INT,
+    FOREIGN KEY (state_code) REFERENCES state(state_code)
+);
+
+-- Crear tabla forecast
+CREATE TABLE IF NOT EXISTS forecast (
+    forecast_code INT PRIMARY KEY,
+    city_code INT,
+    zip_code INT,
+    temperature_celsius DECIMAL(5,2),
+    forecast_date DATE,
+    FOREIGN KEY (city_code) REFERENCES city(city_code),
+    INDEX (zip_code)
+);
+
+DELIMITER //
+CREATE TRIGGER after_forecast_insert
+AFTER INSERT ON forecast
+FOR EACH ROW
+BEGIN
+    INSERT INTO forecast_log (entry_text) VALUES (CONCAT('New forecast for city: ', NEW.city_code));
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER after_forecast_update
+AFTER UPDATE ON forecast
+FOR EACH ROW
+BEGIN
+    DECLARE old_temp DECIMAL(5,2);
+    SELECT temperature_celsius INTO old_temp FROM forecast WHERE forecast_code = NEW.forecast_code;
+
+    INSERT INTO forecast_log (entry_text) VALUES (CONCAT('Update. Old temperature ', old_temp, '. New value ', NEW.temperature_celsius));
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER after_forecast_delete
+AFTER DELETE ON forecast
+FOR EACH ROW
+BEGIN
+    INSERT INTO forecast_log (entry_text) VALUES ('Forecast deleted');
+END;
+//
+DELIMITER ;
+
+-- Inserta un nuevo pronóstico del tiempo para una ciudad en un día en particular
+INSERT INTO forecast (city_code, temperature_celsius, forecast_date) VALUES (1, 25, '2023-10-30');
+-- Actualiza el pronóstico del tiempo con código 1, cambiando la temperatura a 30
+UPDATE forecast SET temperature_celsius = 30 WHERE forecast_code = 1;
+-- Elimina el pronóstico del tiempo con código 1
+DELETE FROM forecast WHERE forecast_code = 1;
+
+
+-- Consultar la tabla de bitácora
+SELECT * FROM forecast_log;
+
